@@ -1,1 +1,1 @@
- https://ivanviab.github.io/IvanVIABMechanicals/
+https://ivanviab.github.io/IvanVIABMechanicals/
