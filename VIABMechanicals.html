@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIABMechanicals - Премиальная автомастерская</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #c5a04d;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --gray: #555;
+            --accent: #8b0000;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--light);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1487756200277-c44bd0aabc23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 60px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(197, 160, 77, 0.2);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #222;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(197, 160, 77, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .service-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--dark);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #222;
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #ccc;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 2px solid var(--primary);
+        }
+
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .client-details h4 {
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .client-details p {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .contact-text h3 {
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .contact-text p, .contact-text a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+
+        .contact-form {
+            flex: 1;
+            background: rgba(30, 30, 30, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            background: #222;
+            color: var(--light);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            padding: 50px 0 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #222;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container,
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>VIAB<span>Mechanicals</span></h1>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#testimonials">Отзывы</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>Премиальное обслуживание автомобилей</h2>
+            <p>Профессиональный сервис, передовые технологии и внимание к деталям для вашего автомобиля высокого класса</p>
+            <a href="#contact" class="btn">Записаться на обслуживание</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Капитальный ремонт</h3>
+                    <p>Полный комплекс работ по восстановлению двигателя, трансмиссии и других систем автомобиля.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Техническое обслуживание</h3>
+                    <p>Регулярное ТО с использованием оригинальных запчастей и профессионального оборудования.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Диагностика</h3>
+                    <p>Компьютерная диагностика всех систем автомобиля для выявления и устранения неисправностей.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Кузовной ремонт</h3>
+                    <p>Восстановление геометрии кузова, покраска и антикоррозийная обработка.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Тюнинг</h3>
+                    <p>Индивидуальный тюнинг экстерьера и интерьера для уникального стиля вашего авто.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Гарантийное обслуживание</h3>
+                    <p>Обслуживание по гарантии с предоставлением всех необходимых документов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2>О нашей мастерской</h2>
+                <p>VIABMechanicals - это премиальная автомастерская с более чем 15-летним опытом работы. Мы специализируемся на обслуживании и ремонте автомобилей премиум-класса, включая Mercedes-Benz, BMW, Audi, Porsche и другие марки.</p>
+                <p>Наша команда состоит из сертифицированных мастеров с международным опытом, которые используют только оригинальные запчасти и передовое оборудование. Мы гордимся безупречной репутацией и доверием наших клиентов.</p>
+                <p>В нашем сервисе вы получите:</p>
+                <ul style="margin: 20px 0 20px 20px; line-height: 1.8;">
+                    <li>Индивидуальный подход к каждому клиенту</li>
+                    <li>Прозрачную стоимость услуг</li>
+                    <li>Гарантию на все выполненные работы</li>
+                    <li>Удобное расположение и комфортное ожидание</li>
+                </ul>
+                <a href="#contact" class="btn">Связаться с нами</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1552232806-608350ab8b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Наша мастерская">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отзывы клиентов</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Отличная работа! Мой Mercedes-Benz E-Class после капитального ремонта двигателя стал работать лучше, чем новый. Профессионализм команды на высоте!</p>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Алексей Петров">
+                        </div>
+                        <div class="client-details">
+                            <h4>Алексей Петров</h4>
+                            <p>Mercedes-Benz владелец</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Обратился в VIABMechanicals по рекомендации друзей. Не пожалел! Сделали диагностику и ремонт моего BMW M3 за один день. Цена соответствует качеству.</p>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Мария Сидорова">
+                        </div>
+                        <div class="client-details">
+                            <h4>Мария Сидорова</h4>
+                            <p>BMW владелица</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Лучшая автомастерская в городе! Профессиональный подход, внимательное отношение к клиенту и безупречное качество работ. Рекомендую всем владельцам премиум автомобилей!</p>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Дмитрий Козлов">
+                        </div>
+                        <div class="client-details">
+                            <h4>Дмитрий Козлов</h4>
+                            <p>Porsche владелец</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h2>Свяжитесь с нами</h2>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Адрес</h3>
+                            <p>ул. Промышленная, 15, Москва, Россия</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Телефон</h3>
+                            <p>+7 (495) 123-45-67</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@viabmechanicals.ru">info@viabmechanicals.ru</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Часы работы</h3>
+                            <p>Пн-Пт: 9:00 - 20:00<br>Сб-Вс: 10:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Запись на обслуживание</h3>
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="car">Марка автомобиля</label>
+                        <select id="car" required>
+                            <option value="">Выберите марку</option>
+                            <option value="mercedes">Mercedes-Benz</option>
+                            <option value="bmw">BMW</option>
+                            <option value="audi">Audi</option>
+                            <option value="porsche">Porsche</option>
+                            <option value="lexus">Lexus</option>
+                            <option value="other">Другая</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Тип услуги</label>
+                        <select id="service" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="repair">Капитальный ремонт</option>
+                            <option value="maintenance">Техническое обслуживание</option>
+                            <option value="diagnostics">Диагностика</option>
+                            <option value="bodywork">Кузовной ремонт</option>
+                            <option value="tuning">Тюнинг</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" placeholder="Опишите проблему или вопросы"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>VIABMechanicals</h2>
+                    <p>Премиальное обслуживание автомобилей высокого класса</p>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 VIABMechanicals. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('show');
+            });
+        });
+
+        // Form submission
+        const appointmentForm = document.getElementById('appointmentForm');
+        if (appointmentForm) {
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                
+                if (name && phone) {
+                    alert('Спасибо за заявку! Наш менеджер свяжется с вами в ближайшее время.');
+                    appointmentForm.reset();
+                } else {
+                    alert('Пожалуйста, заполните все обязательные поля.');
+                }
+            });
+        }
+
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
